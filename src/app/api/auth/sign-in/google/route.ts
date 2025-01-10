@@ -18,11 +18,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const authUrl = googleOAuth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: [
-      'https://www.googleapis.com/auth/youtube.readonly',
-      'https://www.googleapis.com/auth/youtube.force-ssl',
-      'https://www.googleapis.com/auth/spreadsheets',
-      'https://www.googleapis.com/auth/userinfo.email',
       'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/youtube.readonly',
+      'https://www.googleapis.com/auth/spreadsheets',
     ],
     prompt: 'consent',
     state: redirectPath ? JSON.stringify({ [AUTH_PARAMS.redirectPath]: redirectPath }) : undefined,

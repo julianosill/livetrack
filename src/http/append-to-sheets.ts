@@ -14,7 +14,7 @@ interface AppendToSheetsProps {
 
 interface AppendToSheetsResult {
   success: boolean
-  errorCode?: number
+  errorMessage?: string
 }
 
 export async function appendToSheets({
@@ -46,11 +46,19 @@ export async function appendToSheets({
       requestBody: { values },
     })
 
-    if (appendResult.status !== 200) return { success: false, errorCode: appendResult.status }
+    if (appendResult.status !== 200) return { success: false }
 
     return { success: true }
   } catch (error) {
     console.error('Error in appendToSheets:', error)
-    return { success: false }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const errorCode = (error as any).code ?? 0
+    const errorMessage =
+      errorCode === 403
+        ? 'Você não autorizou a manipulação do Google Sheets. Por favor, saia e entre novamente em sua conta e autorize.'
+        : undefined
+
+    return { success: false, errorMessage }
   }
 }

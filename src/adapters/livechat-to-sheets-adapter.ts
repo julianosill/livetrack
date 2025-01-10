@@ -3,11 +3,16 @@ import { formatDate } from '@/helpers'
 import type { LivechatItemType, SheetsValueType } from '@/types'
 
 interface LivechatToSheetsAdapter {
-  livechat: LivechatItemType[]
+  livechat?: LivechatItemType[]
   onlySuperChats?: boolean
 }
 
-export function livechatToSheetsAdapter({ livechat, onlySuperChats }: LivechatToSheetsAdapter): SheetsValueType[] {
+export function livechatToSheetsAdapter({
+  livechat,
+  onlySuperChats,
+}: LivechatToSheetsAdapter): SheetsValueType[] | void {
+  if (!livechat || livechat.length <= 0) return
+
   const messages = livechat.map(message => {
     return onlySuperChats
       ? [

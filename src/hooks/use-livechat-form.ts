@@ -16,7 +16,7 @@ import {
 import { appendToSheets, fetchStreamingLivechat, refreshToken } from '@/http'
 import type { LivechatItemType, SheetsValueType } from '@/types'
 
-interface FetchMessages {
+interface FetchLivechatProps {
   liveId: string
   onlySuperChats?: boolean
 }
@@ -27,6 +27,11 @@ interface AppendMessagesToSheets {
   values: SheetsValueType[]
 }
 
+interface FetchLivechatResult {
+  success: boolean
+  messages?: LivechatItemType[]
+}
+
 export function useLivechatForm() {
   const [isMonitoring, setIsMonitoring] = useState(false)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
@@ -34,7 +39,6 @@ export function useLivechatForm() {
   const spreadsheetIdStorageKey = STORAGE_KEYS.livechat.spreadsheetId
   const sheetNameStorageKey = STORAGE_KEYS.livechat.sheetName
 
-  let livechatMessages: LivechatItemType[] = []
   let lastMessageTimestamp = ''
 
   const form = useForm<LivechatFormSchema>({
@@ -43,7 +47,7 @@ export function useLivechatForm() {
     mode: 'onBlur',
   })
 
-  async function fetchMessages({ liveId, onlySuperChats }: FetchMessages): Promise<{ success: boolean }> {
+  async function fetchLivechat({ liveId, onlySuperChats }: FetchLivechatProps): Promise<FetchLivechatResult> {
     const livechatResult = await fetchStreamingLivechat({ liveId, onlySuperChats, lastMessageTimestamp })
 
     if (!livechatResult.success) {
@@ -52,14 +56,11 @@ export function useLivechatForm() {
       return { success: false }
     }
 
-    const messages = livechatResult.items
-    if (!messages || messages.length <= 0) return { success: true }
-
+    const messages = livechatResult.items ?? []
     const lastMessage = messages[messages.length - 1]
-    lastMessageTimestamp = lastMessage.publishedAt
-    livechatMessages = messages
+    lastMessageTimestamp = lastMessage?.publishedAt ?? ''
 
-    return { success: true }
+    return { success: true, messages }
   }
 
   async function appendMessagesToSheets({
@@ -73,14 +74,15 @@ export function useLivechatForm() {
 
     if (!appendResult?.success) {
       stopMonitoring()
-      toast.error('Erro ao adicionar dados!', {
-        description: 'Verifique se as informações estão corretas. Se o erro persistir, contate o suporte.',
+      toast.error('Erro ao adicionar dados à planilha!', {
+        description:
+          appendResult.errorMessage ??
+          'Verifique se as informações estão corretas. Se o erro persistir, contate o suporte.',
         duration: 6000,
       })
       return { success: false }
     }
 
-    livechatMessages = []
     toast.success('Dados adicionados à planilha com sucesso!')
     return { success: true }
   }
@@ -96,21 +98,23 @@ export function useLivechatForm() {
 
     if (ignorePast) lastMessageTimestamp = new Date().toISOString()
 
-    const { success: fetchSuccess } = await fetchMessages({ liveId, onlySuperChats })
-    if (!fetchSuccess) return stopMonitoring()
+    const fetchResult = await fetchLivechat({ liveId, onlySuperChats })
+    if (!fetchResult.success) return stopMonitoring()
 
-    const values = livechatToSheetsAdapter({ livechat: livechatMessages, onlySuperChats }) as SheetsValueType[]
-
-    const { success: appendSuccess } = await appendMessagesToSheets({ spreadsheetId, sheetName, values })
-    if (!appendSuccess) return stopMonitoring()
+    const values = livechatToSheetsAdapter({ livechat: fetchResult.messages, onlySuperChats }) as SheetsValueType[]
+    const appendResult = await appendMessagesToSheets({ spreadsheetId, sheetName, values })
+    if (!appendResult.success) return stopMonitoring()
 
     intervalRef.current = setInterval(async () => {
-      const isTokenExpiring = await isTokenExpiringIn(30)
+      const isTokenExpiring = await isTokenExpiringIn(5)
       if (isTokenExpiring) await refreshToken()
 
-      await fetchMessages({ liveId, onlySuperChats })
-      const values = livechatToSheetsAdapter({ livechat: livechatMessages, onlySuperChats }) as SheetsValueType[]
-      await appendMessagesToSheets({ spreadsheetId, sheetName, values })
+      const fetchResult = await fetchLivechat({ liveId, onlySuperChats })
+      if (!fetchResult.success) return stopMonitoring()
+
+      const values = livechatToSheetsAdapter({ livechat: fetchResult.messages, onlySuperChats }) as SheetsValueType[]
+      const appendResult = await appendMessagesToSheets({ spreadsheetId, sheetName, values })
+      if (!appendResult.success) return stopMonitoring()
     }, FETCH_LIVECHAT_INTERVAL_IN_SECONDS * 1000)
   }
 
