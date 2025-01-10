@@ -17,5 +17,8 @@ export { Separator } from './ui/separator'
 // utilities
 export { Show } from './utilities/show'
 
+// auth
+export { SignInGoogleButton } from './auth/siginInGoogleButton'
+
 // livechat
 export { LivechatForm } from './livechat/livechat-form'

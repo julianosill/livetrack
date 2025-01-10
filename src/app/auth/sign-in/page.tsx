@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import { getSession } from '@/auth'
+import { SignInGoogleButton } from '@/components'
 import { env } from '@/config'
 import { AUTH_PARAMS, ROUTES } from '@/constants'
 
@@ -23,8 +23,8 @@ export default async function SignInPage({ searchParams }: Readonly<SignInPagePr
   }
 
   return (
-    <div className='flex flex-col gap-2 items-center'>
-      <Link href={signInWithGoogleUrl.toString()}>sign-in</Link>
+    <div className='flex items-center justify-center min-h-svh'>
+      <SignInGoogleButton url={signInWithGoogleUrl.toString()} />
     </div>
   )
 }
