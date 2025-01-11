@@ -4,7 +4,7 @@ import { Button } from '@/components'
 
 export function StartMonitoringButton() {
   return (
-    <Button size='lg' className='col-start-2'>
+    <Button type='submit' size='lg' className='col-start-2 w-full'>
       <SearchCheck />
       Iniciar monitoramento
     </Button>

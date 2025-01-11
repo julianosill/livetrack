@@ -4,7 +4,7 @@ import { Button } from '@/components'
 
 export function StopMonitoringButton() {
   return (
-    <Button variant='secondary' size='lg' className='animate-pulse col-start-2'>
+    <Button type='submit' variant='secondary' size='lg' className='animate-pulse col-start-2 w-full'>
       <LoaderCircle className='animate-spin' />
       Parar monitoramento
     </Button>

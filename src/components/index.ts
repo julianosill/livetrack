@@ -22,3 +22,6 @@ export { SignInGoogleButton } from './auth/siginInGoogleButton'
 
 // livechat
 export { LivechatForm } from './livechat/livechat-form'
+
+// superchats
+export { SuperchatsForm } from './superchats/superchats-form'

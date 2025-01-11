@@ -74,48 +74,4 @@ export async function fetchStreamingLivechat({
     console.error('Error in liveChatMessages:', error)
     return { success: false, errorMessage: 'Live chat não encontrado.' }
   }
-
-  // const liveDetails = await youtube.videos.list({
-  //   part: ['liveStreamingDetails'],
-  //   id: [liveId],
-  // })
-
-  // if (!liveDetails.data.items || liveDetails.data.items.length <= 0) {
-  //   return { success: false, errorMessage: 'Live não encontrada.' }
-  // }
-
-  // const liveChatId =
-  //   liveDetails.data.items[0].liveStreamingDetails?.activeLiveChatId ?? ''
-
-  // const messagesResult = await youtube.liveChatMessages.list({
-  //   part: ['snippet', 'authorDetails'],
-  //   liveChatId,
-  // })
-
-  // if (!messagesResult.data.items || messagesResult.data.items.length <= 0) {
-  //   return { success: false, errorMessage: 'Live chat não encontrado.' }
-  // }
-
-  // const items: LivechatItemType[] = []
-
-  // messagesResult.data.items.forEach(
-  //   (message: youtube_v3.Schema$LiveChatMessage) => {
-  //     if (onlySuperChats && message.snippet?.type !== 'superChatEvent') return
-
-  //     const publishedAt = message.snippet?.publishedAt
-  //     if (
-  //       publishedAt &&
-  //       new Date(publishedAt) <= new Date(lastMessageTimestamp)
-  //     )
-  //       return
-
-  //     const messageDetails = onlySuperChats
-  //       ? superchatAdapter(message)
-  //       : livechatMessageAdapter(message)
-
-  //     items.push(messageDetails)
-  //   },
-  // )
-
-  // return { success: true, items }
 }

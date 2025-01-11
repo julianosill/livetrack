@@ -37,4 +37,13 @@ export type LivechatItemType = {
   publishedAt: string
 }
 
+export type SuperChatType = {
+  authorName: string
+  authorChannelUrl: string
+  message: string
+  currency: string
+  amount: number
+  createdAt: string
+}
+
 export type SheetsValueType = (string | number | undefined)[]

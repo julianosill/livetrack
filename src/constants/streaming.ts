@@ -7,5 +7,5 @@ export const FETCH_LIVECHAT_INTERVAL_IN_SECONDS = 15
 
 export const LIVECHAT_MESSAGE_TYPE = {
   textMessageEvent: 'Comentário',
-  superChatEvent: 'Super Chat',
+  superChatEvent: 'SuperChat',
 } as const

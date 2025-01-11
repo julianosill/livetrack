@@ -94,8 +94,10 @@ export function useLivechatForm() {
     spreadsheetId,
     sheetName,
   }: LivechatFormSchema): Promise<void> {
-    setIsMonitoring(true)
+    const isTokenExpiring = await isTokenExpiringIn(5)
+    if (isTokenExpiring) await refreshToken()
 
+    setIsMonitoring(true)
     if (ignorePast) lastMessageTimestamp = new Date().toISOString()
 
     const fetchResult = await fetchLivechat({ liveId, onlySuperChats })
