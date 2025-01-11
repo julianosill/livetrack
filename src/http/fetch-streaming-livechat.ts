@@ -37,11 +37,17 @@ export async function fetchStreamingLivechat({
       id: [liveId],
     })
 
+    console.log(liveDetails.data.items)
+
     if (!liveDetails.data.items || liveDetails.data.items.length <= 0) {
       return { success: false, errorMessage: 'Live não encontrada.' }
     }
 
     liveChatId = liveDetails.data.items[0].liveStreamingDetails?.activeLiveChatId ?? ''
+
+    if (!liveChatId) {
+      return { success: false, errorMessage: 'Esta live já foi encerrada.' }
+    }
   } catch (error) {
     console.error('Error in liveStreamingDetails:', error)
     return { success: false, errorMessage: 'Live não encontrada.' }
