@@ -19,7 +19,7 @@ export function livechatToSheetsAdapter({
           LIVECHAT_MESSAGE_TYPE[message.type],
           message.authorName,
           message.authorChannelUrl,
-          message.message,
+          message.comment,
           message.currency,
           message.amount,
           formatDate(message.publishedAt, { hour: 'numeric', minute: 'numeric' }),
@@ -28,7 +28,7 @@ export function livechatToSheetsAdapter({
           LIVECHAT_MESSAGE_TYPE[message.type],
           message.authorName,
           message.authorChannelUrl,
-          message.message,
+          message.comment,
           formatDate(message.publishedAt, { hour: 'numeric', minute: 'numeric' }),
         ]
   })

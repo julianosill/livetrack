@@ -68,7 +68,7 @@ export function useLivechatForm() {
     sheetName,
     values,
   }: AppendMessagesToSheets): Promise<{ success: boolean }> {
-    if (values.length <= 0) return { success: true }
+    if (!values || values.length <= 0) return { success: true }
 
     const appendResult = await appendToSheets({ spreadsheetId, sheetName, values })
 

@@ -31,7 +31,7 @@ export type LivechatItemType = {
   type: LivechatMessageType
   authorName: string
   authorChannelUrl: string
-  message: string
+  comment: string
   currency?: string
   amount?: number
   publishedAt: string
@@ -40,7 +40,7 @@ export type LivechatItemType = {
 export type SuperChatType = {
   authorName: string
   authorChannelUrl: string
-  message: string
+  comment: string
   currency: string
   amount: number
   createdAt: string

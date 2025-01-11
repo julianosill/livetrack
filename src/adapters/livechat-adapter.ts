@@ -9,12 +9,13 @@ interface LivechatAdapterProps {
 
 export function livechatAdapter({ message, onlySuperChats }: LivechatAdapterProps): LivechatItemType {
   const messageType = message.snippet?.type ?? ''
+  const comment = onlySuperChats ? message.snippet?.superChatDetails?.userComment : message.snippet?.displayMessage
 
   const formattedMessage: LivechatItemType = {
     type: messageType as LivechatItemType['type'],
     authorName: message.authorDetails?.displayName ?? '',
     authorChannelUrl: message.authorDetails?.channelUrl ?? '',
-    message: message.snippet?.superChatDetails?.userComment ?? '',
+    comment: comment ?? '',
     currency: message.snippet?.superChatDetails?.currency ?? undefined,
     amount: undefined,
     publishedAt: message.snippet?.publishedAt ?? '',

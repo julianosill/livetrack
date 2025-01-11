@@ -9,7 +9,7 @@ export function superChatAdapter(superchat: youtube_v3.Schema$SuperChatEvent) {
   const formattedSuperchat: SuperChatType = {
     authorName: superchat.snippet?.supporterDetails?.displayName ?? '',
     authorChannelUrl: superchat.snippet?.supporterDetails?.channelUrl ?? '',
-    message: superchat.snippet?.commentText ?? '',
+    comment: superchat.snippet?.commentText ?? '',
     currency: superchat.snippet?.currency ?? '',
     amount,
     createdAt: superchat.snippet?.createdAt ?? '',

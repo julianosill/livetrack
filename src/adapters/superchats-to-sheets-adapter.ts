@@ -8,7 +8,7 @@ export function superChatsToSheetsAdapter(superchats: SuperChatType[]): SheetsVa
     return [
       superchat.authorName,
       superchat.authorChannelUrl,
-      superchat.message,
+      superchat.comment,
       superchat.currency,
       superchat.amount,
       formatDate(superchat.createdAt, { hour: 'numeric', minute: 'numeric' }),
