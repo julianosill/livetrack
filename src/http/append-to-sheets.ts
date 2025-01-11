@@ -1,9 +1,7 @@
 'use server'
 
-import { google } from 'googleapis'
-
 import { getSession } from '@/auth'
-import { googleOAuth2Client } from '@/lib/google'
+import { googleOAuth2Client, googleSheets } from '@/lib/google'
 import type { SheetsValueType } from '@/types'
 
 interface AppendToSheetsProps {
@@ -26,20 +24,20 @@ export async function appendToSheets({
   if (!session) return { success: false }
 
   googleOAuth2Client.setCredentials(session?.tokens)
-  const sheets = google.sheets({ version: 'v4', auth: googleOAuth2Client })
+  const googleSheetsClient = googleSheets(googleOAuth2Client)
 
   try {
-    const spreadsheet = await sheets.spreadsheets.get({ spreadsheetId })
+    const spreadsheet = await googleSheetsClient.spreadsheets.get({ spreadsheetId })
     const sheetExists = spreadsheet.data.sheets?.some(sheet => sheet.properties?.title === sheetName)
 
     if (!sheetExists) {
-      await sheets.spreadsheets.batchUpdate({
+      await googleSheetsClient.spreadsheets.batchUpdate({
         spreadsheetId,
         requestBody: { requests: [{ addSheet: { properties: { title: sheetName } } }] },
       })
     }
 
-    const appendResult = await sheets.spreadsheets.values.append({
+    const appendResult = await googleSheetsClient.spreadsheets.values.append({
       spreadsheetId,
       range: `${sheetName}!A1`,
       valueInputOption: 'RAW',

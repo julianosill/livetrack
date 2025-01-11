@@ -1,10 +1,10 @@
 'use server'
 
-import { google, youtube_v3 } from 'googleapis'
+import { youtube_v3 } from 'googleapis'
 
 import { livechatAdapter } from '@/adapters'
 import { getSession } from '@/auth'
-import { googleOAuth2Client } from '@/lib/google'
+import { googleOAuth2Client, youtube } from '@/lib/google'
 import type { LivechatItemType } from '@/types'
 
 interface FetchStreamingLiveChatProps {
@@ -28,11 +28,11 @@ export async function fetchStreamingLivechat({
   if (!session) return { success: false }
 
   googleOAuth2Client.setCredentials(session.tokens)
-  const youtube = google.youtube({ version: 'v3', auth: googleOAuth2Client })
+  const youtubeClient = youtube(googleOAuth2Client)
   let liveChatId = ''
 
   try {
-    const liveDetails = await youtube.videos.list({
+    const liveDetails = await youtubeClient.videos.list({
       part: ['liveStreamingDetails'],
       id: [liveId],
     })
@@ -48,7 +48,7 @@ export async function fetchStreamingLivechat({
   }
 
   try {
-    const livechat = await youtube.liveChatMessages.list({
+    const livechat = await youtubeClient.liveChatMessages.list({
       part: ['snippet', 'authorDetails'],
       liveChatId,
     })

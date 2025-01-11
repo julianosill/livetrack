@@ -18,10 +18,7 @@ export async function refreshToken() {
     const { credentials } = await googleOAuth2Client.refreshAccessToken()
     if (!credentials) return redirect(ROUTES.api.auth.signOut)
 
-    await createSession({
-      user: session.user,
-      tokens: credentials as SessionType['tokens'],
-    })
+    await createSession({ user: session.user, tokens: credentials as SessionType['tokens'] })
   } catch (error) {
     console.error('Error refreshing tokens:', error)
     return redirect(ROUTES.api.auth.signOut)

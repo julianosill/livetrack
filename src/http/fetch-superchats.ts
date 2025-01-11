@@ -1,11 +1,9 @@
 'use server'
 
-import { google } from 'googleapis'
-
 import { superChatAdapter } from '@/adapters'
 import { getSession } from '@/auth'
 import { wait } from '@/helpers'
-import { googleOAuth2Client } from '@/lib/google'
+import { googleOAuth2Client, youtube } from '@/lib/google'
 import type { SuperChatType } from '@/types'
 
 interface FetchSuperChatsResult {
@@ -19,14 +17,14 @@ export async function fetchSuperchats(): Promise<FetchSuperChatsResult> {
   if (!session) return { success: false }
 
   googleOAuth2Client.setCredentials(session.tokens)
-  const youtube = google.youtube({ version: 'v3', auth: googleOAuth2Client })
+  const youtubeClient = youtube(googleOAuth2Client)
 
   try {
     let superchats: SuperChatType[] = []
     let nextPageToken: string | undefined
 
     do {
-      const result = await youtube.superChatEvents.list({ part: ['snippet'], pageToken: nextPageToken })
+      const result = await youtubeClient.superChatEvents.list({ part: ['snippet'], pageToken: nextPageToken })
 
       if (result.status !== 200) {
         return { success: false, errorMessage: 'Não foi possível obter os SuperChats do seu canal.' }
