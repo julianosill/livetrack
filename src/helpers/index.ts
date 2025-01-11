@@ -7,6 +7,9 @@ export { wait } from './wait'
 // auth
 export { isTokenExpiringIn } from './is-token-expiring-in'
 
+// sheets
+export { appendValuesToSheets } from './append-values-to-sheets'
+
 // validations
 export {
   livechatFormDefaultValues,

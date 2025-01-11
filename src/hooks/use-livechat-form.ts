@@ -6,6 +6,7 @@ import { toast } from 'sonner'
 import { livechatToSheetsAdapter } from '@/adapters'
 import { FETCH_LIVECHAT_INTERVAL_IN_SECONDS, STORAGE_KEYS } from '@/constants'
 import {
+  appendValuesToSheets,
   getStorageItem,
   isTokenExpiringIn,
   livechatFormDefaultValues,
@@ -13,18 +14,12 @@ import {
   livechatFormSchema,
   setStorageItem,
 } from '@/helpers'
-import { appendToSheets, fetchStreamingLivechat, refreshToken } from '@/http'
+import { fetchStreamingLivechat, refreshToken } from '@/http'
 import type { LivechatItemType, SheetsValueType } from '@/types'
 
 interface FetchLivechatProps {
   liveId: string
   onlySuperChats?: boolean
-}
-
-interface AppendMessagesToSheets {
-  spreadsheetId: string
-  sheetName: string
-  values: SheetsValueType[]
 }
 
 interface FetchLivechatResult {
@@ -63,30 +58,6 @@ export function useLivechatForm() {
     return { success: true, messages }
   }
 
-  async function appendMessagesToSheets({
-    spreadsheetId,
-    sheetName,
-    values,
-  }: AppendMessagesToSheets): Promise<{ success: boolean }> {
-    if (!values || values.length <= 0) return { success: true }
-
-    const appendResult = await appendToSheets({ spreadsheetId, sheetName, values })
-
-    if (!appendResult?.success) {
-      stopMonitoring()
-      toast.error('Erro ao adicionar dados à planilha!', {
-        description:
-          appendResult.errorMessage ??
-          'Verifique se as informações estão corretas. Se o erro persistir, contate o suporte.',
-        duration: 6000,
-      })
-      return { success: false }
-    }
-
-    toast.success('Dados adicionados à planilha com sucesso!')
-    return { success: true }
-  }
-
   async function startMonitoring({
     liveId,
     onlySuperChats,
@@ -104,7 +75,7 @@ export function useLivechatForm() {
     if (!fetchResult.success) return stopMonitoring()
 
     const values = livechatToSheetsAdapter({ livechat: fetchResult.messages, onlySuperChats }) as SheetsValueType[]
-    const appendResult = await appendMessagesToSheets({ spreadsheetId, sheetName, values })
+    const appendResult = await appendValuesToSheets({ spreadsheetId, sheetName, values, onError: stopMonitoring })
     if (!appendResult.success) return stopMonitoring()
 
     intervalRef.current = setInterval(async () => {
@@ -115,7 +86,7 @@ export function useLivechatForm() {
       if (!fetchResult.success) return stopMonitoring()
 
       const values = livechatToSheetsAdapter({ livechat: fetchResult.messages, onlySuperChats }) as SheetsValueType[]
-      const appendResult = await appendMessagesToSheets({ spreadsheetId, sheetName, values })
+      const appendResult = await appendValuesToSheets({ spreadsheetId, sheetName, values, onError: stopMonitoring })
       if (!appendResult.success) return stopMonitoring()
     }, FETCH_LIVECHAT_INTERVAL_IN_SECONDS * 1000)
   }
