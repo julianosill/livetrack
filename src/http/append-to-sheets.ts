@@ -2,12 +2,12 @@
 
 import { getSession } from '@/auth'
 import { googleOAuth2Client, googleSheets } from '@/lib/google'
-import type { GoogleSheetsRowsType } from '@/types/google-sheets'
+import type { GoogleSheetsRowType } from '@/types/google-sheets'
 
 interface AppendToSheetsProps {
   spreadsheetId: string
   sheetName: string
-  values: GoogleSheetsRowsType[]
+  values: GoogleSheetsRowType[]
 }
 
 interface AppendToSheetsResult {
