@@ -54,7 +54,8 @@ export function useLivechatForm() {
 
     const messages = livechatResult.items ?? []
     const lastMessage = messages[messages.length - 1]
-    lastMessageTimestamp = lastMessage?.publishedAt ?? ''
+
+    if (lastMessage) lastMessageTimestamp = lastMessage.publishedAt
 
     return { success: true, messages }
   }

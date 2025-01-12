@@ -9,6 +9,7 @@ export { isTokenExpiringIn } from './is-token-expiring-in'
 
 // sheets
 export { appendValuesToSheets } from './append-values-to-sheets'
+export { exportToCSV } from './export-values-to-csv'
 
 // validations
 export {
