@@ -1,12 +1,12 @@
 import { toast } from 'sonner'
 
 import { appendToSheets } from '@/http'
-import type { GoogleSheetsValueType } from '@/types/google-sheets'
+import type { GoogleSheetsRowType } from '@/types/google-sheets'
 
 interface AppendValuesToSheets {
   spreadsheetId: string
   sheetName: string
-  values: GoogleSheetsValueType[]
+  values: GoogleSheetsRowType[]
   onError?: () => void
 }
 

@@ -1,5 +1,8 @@
+import Link from 'next/link'
 import type React from 'react'
 
+import { LiveTrackLogo } from '@/components'
+import { ROUTES } from '@/constants'
 import { cn } from '@/lib/utils'
 import type { SessionType } from '@/types/auth'
 
@@ -12,7 +15,12 @@ interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Header({ user, className, ...props }: Readonly<HeaderProps>) {
   return (
-    <header className={cn('flex gap-2 items-center', className)} {...props}>
+    <header className={cn('flex gap-8 items-center', className)} {...props}>
+      <Link href={ROUTES.home}>
+        <LiveTrackLogo className='fill-accent-foreground w-36' />
+        <span className='sr-only'>LiveTrack</span>
+      </Link>
+
       <NavMenu />
 
       <AccountMenu user={user} className='ml-auto' />

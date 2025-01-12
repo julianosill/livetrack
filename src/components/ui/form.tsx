@@ -6,7 +6,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 import { Controller, ControllerProps, FieldPath, FieldValues, FormProvider, useFormContext } from 'react-hook-form'
 
-import { Label } from '@/components/ui/label'
+import { Label } from '@/components'
 import { cn } from '@/lib/utils'
 
 const FormRoot = FormProvider

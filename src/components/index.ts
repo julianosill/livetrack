@@ -1,6 +1,7 @@
 // globals
 export { Footer } from './globals/footer'
 export { Header } from './globals/header'
+export { LiveTrackLogo } from './globals/livetrack-logo'
 export { PageHeader } from './globals/page-header'
 
 // ui
@@ -11,6 +12,7 @@ export { Checkbox } from './ui/checkbox'
 export { DropdownMenu } from './ui/dropdown-menu'
 export { Form } from './ui/form'
 export { Input } from './ui/input'
+export { Label } from './ui/label'
 export { NavButton } from './ui/nav-button'
 export { Separator } from './ui/separator'
 

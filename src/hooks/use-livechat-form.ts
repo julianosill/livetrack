@@ -15,7 +15,7 @@ import {
   setStorageItem,
 } from '@/helpers'
 import { fetchStreamingLivechat, refreshToken } from '@/http'
-import type { GoogleSheetsValueType } from '@/types/google-sheets'
+import type { GoogleSheetsRowType } from '@/types/google-sheets'
 import type { LivechatItemType } from '@/types/youtube'
 
 interface FetchLivechatProps {
@@ -78,7 +78,8 @@ export function useLivechatForm() {
     const values = livechatToSheetsAdapter({
       livechat: fetchResult.messages,
       onlySuperChats,
-    }) as GoogleSheetsValueType[]
+    }) as GoogleSheetsRowType[]
+
     const appendResult = await appendValuesToSheets({ spreadsheetId, sheetName, values, onError: stopMonitoring })
     if (!appendResult.success) return stopMonitoring()
 
@@ -92,7 +93,7 @@ export function useLivechatForm() {
       const values = livechatToSheetsAdapter({
         livechat: fetchResult.messages,
         onlySuperChats,
-      }) as GoogleSheetsValueType[]
+      }) as GoogleSheetsRowType[]
       const appendResult = await appendValuesToSheets({ spreadsheetId, sheetName, values, onError: stopMonitoring })
       if (!appendResult.success) return stopMonitoring()
     }, FETCH_LIVECHAT_INTERVAL_IN_SECONDS * 1000)

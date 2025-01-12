@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 
 import { getSession } from '@/auth'
-import { SignInGoogleButton } from '@/components'
+import { LiveTrackLogo, SignInGoogleButton } from '@/components'
 import { env } from '@/config'
 import { AUTH_PARAMS, ROUTES } from '@/constants'
 
@@ -23,8 +23,15 @@ export default async function SignInPage({ searchParams }: Readonly<SignInPagePr
   }
 
   return (
-    <div className='flex items-center justify-center min-h-svh'>
-      <SignInGoogleButton url={signInWithGoogleUrl.toString()} />
+    <div className='flex items-center justify-center min-h-svh p-4'>
+      <main className='bg-card p-6 xs:p-12 border rounded-2xl max-w-md text-center'>
+        <LiveTrackLogo className='fill-accent-foreground w-56 mx-auto pb-8' />
+        <p className='pb-12 text-muted-foreground text-sm'>
+          Capture e salve comentários e SuperChats de lives do YouTube em tempo real no Google Sheets.
+        </p>
+
+        <SignInGoogleButton url={signInWithGoogleUrl.toString()} />
+      </main>
     </div>
   )
 }
