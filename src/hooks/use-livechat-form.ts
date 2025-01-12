@@ -15,7 +15,8 @@ import {
   setStorageItem,
 } from '@/helpers'
 import { fetchStreamingLivechat, refreshToken } from '@/http'
-import type { LivechatItemType, SheetsValueType } from '@/types'
+import type { GoogleSheetsValueType } from '@/types/google-sheets'
+import type { LivechatItemType } from '@/types/youtube'
 
 interface FetchLivechatProps {
   liveId: string
@@ -74,7 +75,10 @@ export function useLivechatForm() {
     const fetchResult = await fetchLivechat({ liveId, onlySuperChats })
     if (!fetchResult.success) return stopMonitoring()
 
-    const values = livechatToSheetsAdapter({ livechat: fetchResult.messages, onlySuperChats }) as SheetsValueType[]
+    const values = livechatToSheetsAdapter({
+      livechat: fetchResult.messages,
+      onlySuperChats,
+    }) as GoogleSheetsValueType[]
     const appendResult = await appendValuesToSheets({ spreadsheetId, sheetName, values, onError: stopMonitoring })
     if (!appendResult.success) return stopMonitoring()
 
@@ -85,7 +89,10 @@ export function useLivechatForm() {
       const fetchResult = await fetchLivechat({ liveId, onlySuperChats })
       if (!fetchResult.success) return stopMonitoring()
 
-      const values = livechatToSheetsAdapter({ livechat: fetchResult.messages, onlySuperChats }) as SheetsValueType[]
+      const values = livechatToSheetsAdapter({
+        livechat: fetchResult.messages,
+        onlySuperChats,
+      }) as GoogleSheetsValueType[]
       const appendResult = await appendValuesToSheets({ spreadsheetId, sheetName, values, onError: stopMonitoring })
       if (!appendResult.success) return stopMonitoring()
     }, FETCH_LIVECHAT_INTERVAL_IN_SECONDS * 1000)

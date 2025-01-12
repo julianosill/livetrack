@@ -1,8 +1,6 @@
-import type { youtube_v3 } from 'googleapis'
+import type { SuperChatFromYoutubeType, SuperChatType } from '@/types/youtube'
 
-import type { SuperChatType } from '@/types'
-
-export function superChatAdapter(superchat: youtube_v3.Schema$SuperChatEvent) {
+export function superChatAdapter(superchat: SuperChatFromYoutubeType) {
   const amountInMicros = Number(superchat.snippet?.amountMicros ?? 0)
   const amount = amountInMicros > 0 ? amountInMicros / 1000 : 0
 

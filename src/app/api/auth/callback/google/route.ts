@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server'
 import { createSession, getSession } from '@/auth'
 import { AUTH_PARAMS, ROUTES } from '@/constants'
 import { googleOAuth2, googleOAuth2Client } from '@/lib/google'
-import type { GoogleAuthStateType, SessionType } from '@/types'
+import type { GoogleAuthStateType, SessionType } from '@/types/auth'
 
 export async function GET(request: NextRequest) {
   const requestUrl = request.nextUrl

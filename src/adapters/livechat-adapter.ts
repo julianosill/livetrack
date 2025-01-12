@@ -1,9 +1,7 @@
-import type { youtube_v3 } from 'googleapis'
-
-import type { LivechatItemType } from '@/types'
+import type { LivechatItemType, LivechatMessageFromYoutube } from '@/types/youtube'
 
 interface LivechatAdapterProps {
-  message: youtube_v3.Schema$LiveChatMessage
+  message: LivechatMessageFromYoutube
   onlySuperChats?: boolean
 }
 

@@ -1,7 +1,8 @@
 import { formatDate } from '@/helpers'
-import type { SheetsValueType, SuperChatType } from '@/types'
+import type { GoogleSheetsValueType } from '@/types/google-sheets'
+import type { SuperChatType } from '@/types/youtube'
 
-export function superChatsToSheetsAdapter(superchats: SuperChatType[]): SheetsValueType[] {
+export function superChatsToSheetsAdapter(superchats: SuperChatType[]): GoogleSheetsValueType[] {
   if (!superchats || superchats.length <= 0) return []
 
   const formattedSuperchats = superchats.map(superchat => {

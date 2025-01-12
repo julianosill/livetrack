@@ -7,7 +7,7 @@ import type React from 'react'
 import { Avatar, DropdownMenu } from '@/components'
 import { ROUTES } from '@/constants'
 import { cn } from '@/lib/utils'
-import type { SessionType } from '@/types'
+import type { SessionType } from '@/types/auth'
 
 interface AccountProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   user: SessionType['user']

@@ -4,7 +4,7 @@ import { superChatAdapter } from '@/adapters'
 import { getSession } from '@/auth'
 import { wait } from '@/helpers'
 import { googleOAuth2Client, youtube } from '@/lib/google'
-import type { SuperChatType } from '@/types'
+import type { SuperChatType } from '@/types/youtube'
 
 interface FetchSuperChatsResult {
   success: boolean

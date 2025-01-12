@@ -5,7 +5,7 @@ import { youtube_v3 } from 'googleapis'
 import { livechatAdapter } from '@/adapters'
 import { getSession } from '@/auth'
 import { googleOAuth2Client, youtube } from '@/lib/google'
-import type { LivechatItemType } from '@/types'
+import type { LivechatItemType } from '@/types/youtube'
 
 interface FetchStreamingLiveChatProps {
   liveId: string
@@ -36,8 +36,6 @@ export async function fetchStreamingLivechat({
       part: ['liveStreamingDetails'],
       id: [liveId],
     })
-
-    console.log(liveDetails.data.items)
 
     if (!liveDetails.data.items || liveDetails.data.items.length <= 0) {
       return { success: false, errorMessage: 'Live não encontrada.' }

@@ -4,7 +4,8 @@ import { jwtVerify, SignJWT } from 'jose'
 import { cookies } from 'next/headers'
 
 import { env } from '@/config'
-import type { SessionType } from '@/types'
+
+import type { SessionType } from './types/auth'
 
 const key = new TextEncoder().encode(env.JWT_SECRET_KEY)
 const cookieExpiryDateInSeconds = 60 * 60 * 24 // 24h

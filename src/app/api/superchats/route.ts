@@ -6,7 +6,7 @@ import { getSession } from '@/auth'
 import { ROUTES } from '@/constants'
 import { wait } from '@/helpers'
 import { googleOAuth2Client } from '@/lib/google'
-import type { SuperChatType } from '@/types'
+import type { SuperChatType } from '@/types/youtube'
 
 export async function GET() {
   const session = await getSession()

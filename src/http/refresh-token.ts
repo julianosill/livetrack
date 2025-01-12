@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { createSession, getSession } from '@/auth'
 import { ROUTES } from '@/constants'
 import { googleOAuth2Client } from '@/lib/google'
-import type { SessionType } from '@/types'
+import type { SessionType } from '@/types/auth'
 
 export async function refreshToken() {
   const session = await getSession()

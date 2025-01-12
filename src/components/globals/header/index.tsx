@@ -1,7 +1,7 @@
 import type React from 'react'
 
 import { cn } from '@/lib/utils'
-import type { SessionType } from '@/types'
+import type { SessionType } from '@/types/auth'
 
 import { AccountMenu } from './account-menu'
 import { NavMenu } from './nav-menu'

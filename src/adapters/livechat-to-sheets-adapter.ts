@@ -1,6 +1,7 @@
 import { LIVECHAT_MESSAGE_TYPE } from '@/constants'
 import { formatDate } from '@/helpers'
-import type { LivechatItemType, SheetsValueType } from '@/types'
+import type { GoogleSheetsValueType } from '@/types/google-sheets'
+import type { LivechatItemType } from '@/types/youtube'
 
 interface LivechatToSheetsAdapter {
   livechat?: LivechatItemType[]
@@ -10,7 +11,7 @@ interface LivechatToSheetsAdapter {
 export function livechatToSheetsAdapter({
   livechat,
   onlySuperChats,
-}: LivechatToSheetsAdapter): SheetsValueType[] | void {
+}: LivechatToSheetsAdapter): GoogleSheetsValueType[] | void {
   if (!livechat || livechat.length <= 0) return
 
   const messages = livechat.map(message => {
