@@ -21,7 +21,7 @@ export function livechatAdapter({ message, onlySuperChats }: LivechatAdapterProp
 
   if (onlySuperChats) {
     const amountInMicros = Number(message.snippet?.superChatDetails?.amountMicros)
-    const amount = amountInMicros / 1000
+    const amount = amountInMicros / 1000000
     formattedMessage.amount = amount
   }
 
