@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import googleIcon from '@/assets/icons/google.svg'
+import googleIcon from '@/assets/google-icon.svg'
 import { Button, Show } from '@/components'
 
 interface SignInGoogleButtonProps {

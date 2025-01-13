@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: '%s | LiveTrack',
     default: 'LiveTrack',
   },
-  description: 'Capture e salve comentários e SuperChats de lives do YouTube em tempo real no Google Sheets.',
+  description: 'Capture comentários em lives do YouTube em tempo real e também SuperChats enviados ao seu canal.',
   metadataBase: new URL(env.NEXT_PUBLIC_APP_BASE_URL),
 }
 
