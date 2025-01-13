@@ -12,7 +12,7 @@ export default [
   pluginReact.configs.flat.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}', './*.{js,mjs,cjs,ts,jsx,tsx}'],
     plugins: {
       prettier: eslintPluginPrettier,
       'simple-import-sort': simpleImportSort,

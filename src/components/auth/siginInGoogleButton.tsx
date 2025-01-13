@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import googleIcon from '@/assets/google-icon.svg'
 import { Button, Show } from '@/components'
 
 interface SignInGoogleButtonProps {
@@ -26,7 +25,7 @@ export function SignInGoogleButton({ url }: Readonly<SignInGoogleButtonProps>) {
       <Show
         when={isPending}
         render={<LoaderCircle className='animate-spin' />}
-        fallback={<Image src={googleIcon} alt='Google' className='size-5' />}
+        fallback={<Image src='/icons/google.svg' alt='Google' width={256} height={262} className='size-5' />}
       />
       Entrar com sua conta do Google
     </Button>
