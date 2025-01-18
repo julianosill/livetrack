@@ -23,7 +23,7 @@ export default async function SignInPage({ searchParams }: Readonly<SignInPagePr
   }
 
   return (
-    <div className='flex items-center justify-center min-h-svh p-4'>
+    <div className='flex-1 flex items-center justify-center p-4'>
       <main className='bg-card p-6 xs:p-12 border rounded-2xl max-w-md text-center'>
         <LiveTrackLogo className='fill-accent-foreground w-56 mx-auto pb-8' />
         <p className='pb-12 text-muted-foreground text-sm'>

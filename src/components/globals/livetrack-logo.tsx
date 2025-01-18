@@ -10,7 +10,7 @@ export function LiveTrackLogo({ className, ...props }: React.HTMLAttributes<HTML
       viewBox='0 0 953 171'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
-      className={cn('h-auto', className)}
+      className={cn('h-auto fill-accent-foreground max-w-full', className)}
       {...props}
     >
       <path

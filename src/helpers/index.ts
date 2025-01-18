@@ -1,5 +1,6 @@
 // utilities
 export { extractId } from './extract-id'
+export { extractMdxData } from './extract-mdx-data'
 export { formatDate } from './format-date'
 export { getStorageItem, removeStorageItems, setStorageItem } from './local-storage'
 export { wait } from './wait'

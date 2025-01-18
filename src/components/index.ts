@@ -13,7 +13,9 @@ export { DropdownMenu } from './ui/dropdown-menu'
 export { Form } from './ui/form'
 export { Input } from './ui/input'
 export { Label } from './ui/label'
+export { Markdown } from './ui/markdown'
 export { NavButton } from './ui/nav-button'
+export { NavLink } from './ui/nav-link'
 export { Separator } from './ui/separator'
 
 // utilities

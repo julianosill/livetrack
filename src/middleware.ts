@@ -36,12 +36,13 @@ export const config = {
     /*
      * Match all request paths except for the ones starting with:
      * - auth (Auth routes)
+     * - docs (Docs routes)
      * - api/auth (Api auth routes)
      * - icons (public icon files)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/((?!auth|api/auth|icons|_next/static|_next/image|favicon.ico).*)',
+    '/((?!auth|docs|api/auth|icons|_next/static|_next/image|favicon.ico).*)',
   ],
 }

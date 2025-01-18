@@ -1,27 +1,32 @@
-import { promises } from 'node:fs'
-import path from 'node:path'
+import { Markdown, PageHeader } from '@/components'
+import { extractMdxData } from '@/helpers'
 
-import { compileMDX, MDXRemote } from 'next-mdx-remote/rsc'
-
-async function getMdxContent<T>(slug: string) {
-  const filePath = path.join(process.cwd(), 'src/mdx/docs', `${slug}.mdx`)
-  const source = await promises.readFile(filePath, 'utf-8')
-  const { frontmatter, content } = await compileMDX<T>({ source, options: { parseFrontmatter: true } })
-  return { source, frontmatter, content }
+interface DocsPageProps {
+  params: { slug: string }
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const { frontmatter } = await getMdxContent<{ title: string }>(params.slug)
-  return { title: frontmatter.title }
+interface DocsMdxData {
+  title: string
+  updatedAt: string
+  content: string
 }
 
-export default async function TermsPage({ params }: { params: { slug: string } }) {
-  const { source } = await getMdxContent<{ title: string }>(params.slug)
-  const split = source.split('---')
+export async function generateMetadata({ params }: Readonly<DocsPageProps>) {
+  const { metadata } = await extractMdxData<DocsMdxData>(params.slug)
+  return { title: metadata.title }
+}
+
+export default async function DocsPage({ params }: Readonly<DocsPageProps>) {
+  const { content, metadata } = await extractMdxData<DocsMdxData>(params.slug)
 
   return (
-    <main className='prose dark:prose-invert'>
-      <MDXRemote source={split[2]} />
+    <main>
+      <PageHeader.Root className='pb-6'>
+        <PageHeader.Title>{metadata.title}</PageHeader.Title>
+        <PageHeader.Description>Última atualização: {metadata.updatedAt}</PageHeader.Description>
+      </PageHeader.Root>
+
+      <Markdown>{content}</Markdown>
     </main>
   )
 }

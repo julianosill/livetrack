@@ -17,7 +17,7 @@ export function Header({ user, className, ...props }: Readonly<HeaderProps>) {
   return (
     <header className={cn('flex gap-8 items-center', className)} {...props}>
       <Link href={ROUTES.home}>
-        <LiveTrackLogo className='fill-accent-foreground w-36' />
+        <LiveTrackLogo className='w-36' />
         <span className='sr-only'>LiveTrack</span>
       </Link>
 

@@ -10,6 +10,10 @@ export const ROUTES = {
     signIn: '/auth/sign-in',
     signup: '/auth/sign-up',
   },
+  docs: {
+    terms: '/docs/terms',
+    privacy: '/docs/privacy',
+  },
   home: '/',
   livechat: '/livechat',
   superchats: '/superchats',
