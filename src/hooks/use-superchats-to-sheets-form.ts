@@ -3,7 +3,7 @@ import { useEffect, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
-import { superChatsToSheetsAdapter } from '@/adapters'
+import { superChatsToRowsAdapter } from '@/adapters'
 import { STORAGE_KEYS } from '@/constants'
 import {
   appendValuesToSheets,
@@ -11,30 +11,30 @@ import {
   isTokenExpiringIn,
   livechatFormDefaultValues,
   setStorageItem,
-  superchatsFormDefaultValues,
-  type SuperchatsFormSchema,
-  superchatsFormSchema,
+  superchatsToSheetsFormDefaultValues,
+  type SuperchatsToSheetsFormSchema,
+  superchatsToSheetsFormSchema,
 } from '@/helpers'
 import { fetchSuperchats, refreshToken } from '@/http'
 
-export function useSuperchatsForm() {
+export function useSuperchatsToSheetsForm() {
   const [isPending, startTransition] = useTransition()
 
   const spreadsheetIdStorageKey = STORAGE_KEYS.superchats.spreadsheetId
   const sheetNameStorageKey = STORAGE_KEYS.superchats.sheetName
 
-  const form = useForm<SuperchatsFormSchema>({
-    resolver: zodResolver(superchatsFormSchema),
-    values: superchatsFormDefaultValues,
+  const form = useForm<SuperchatsToSheetsFormSchema>({
+    resolver: zodResolver(superchatsToSheetsFormSchema),
+    values: superchatsToSheetsFormDefaultValues,
     mode: 'onBlur',
   })
 
-  async function handleSuperChatsExport({
+  async function exportSuperChatsToSheets({
     spreadsheetId,
     rememberSpreadsheetId,
     sheetName,
     rememberSheetName,
-  }: SuperchatsFormSchema): Promise<void> {
+  }: SuperchatsToSheetsFormSchema): Promise<void> {
     const isTokenExpiring = await isTokenExpiringIn(5)
     if (isTokenExpiring) await refreshToken()
 
@@ -56,7 +56,7 @@ export function useSuperchatsForm() {
         return
       }
 
-      const values = superChatsToSheetsAdapter(superchats)
+      const values = superChatsToRowsAdapter(superchats)
       await appendValuesToSheets({ spreadsheetId, sheetName, values })
 
       return
@@ -75,5 +75,5 @@ export function useSuperchatsForm() {
     })
   }, [])
 
-  return { form, isPending, handleSuperChatsExport }
+  return { form, isPending, exportSuperChatsToSheets }
 }

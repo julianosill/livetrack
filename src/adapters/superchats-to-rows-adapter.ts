@@ -2,7 +2,7 @@ import { formatDate } from '@/helpers'
 import type { GoogleSheetsRowType } from '@/types/google-sheets'
 import type { SuperChatType } from '@/types/youtube'
 
-export function superChatsToSheetsAdapter(superchats: SuperChatType[]): GoogleSheetsRowType[] {
+export function superChatsToRowsAdapter(superchats: SuperChatType[]): GoogleSheetsRowType[] {
   if (!superchats || superchats.length <= 0) return []
 
   const formattedSuperchats = superchats.map(superchat => {

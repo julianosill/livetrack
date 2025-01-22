@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 import { extractId } from '@/helpers'
 
-export const superchatsFormSchema = z.object({
+export const superchatsToSheetsFormSchema = z.object({
   spreadsheetId: z
     .string()
     .min(44, 'Insira um ID ou URL válida da sua planilha')
@@ -12,9 +12,9 @@ export const superchatsFormSchema = z.object({
   rememberSheetName: z.boolean(),
 })
 
-export type SuperchatsFormSchema = z.infer<typeof superchatsFormSchema>
+export type SuperchatsToSheetsFormSchema = z.infer<typeof superchatsToSheetsFormSchema>
 
-export const superchatsFormDefaultValues: SuperchatsFormSchema = {
+export const superchatsToSheetsFormDefaultValues: SuperchatsToSheetsFormSchema = {
   spreadsheetId: '',
   rememberSpreadsheetId: false,
   sheetName: '',

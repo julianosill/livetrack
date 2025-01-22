@@ -3,21 +3,25 @@
 import { LoaderCircle, MessageSquareQuote } from 'lucide-react'
 
 import { Button, Checkbox, Form, Input, Separator, Show } from '@/components'
-import { useSuperchatsForm } from '@/hooks'
+import { useSuperchatsToSheetsForm } from '@/hooks'
 import { cn } from '@/lib/utils'
 
-export function SuperchatsForm({ className, ...props }: Readonly<React.HTMLAttributes<HTMLFormElement>>) {
-  const { form, isPending, handleSuperChatsExport } = useSuperchatsForm()
+export function SuperchatsToSheetsForm({ className, ...props }: Readonly<React.HTMLAttributes<HTMLFormElement>>) {
+  const { form, isPending, exportSuperChatsToSheets } = useSuperchatsToSheetsForm()
 
   return (
     <Form.Root {...form}>
-      <Form.Wrapper onSubmit={form.handleSubmit(handleSuperChatsExport)} className={cn('gap-4', className)} {...props}>
+      <Form.Wrapper
+        onSubmit={form.handleSubmit(exportSuperChatsToSheets)}
+        className={cn('gap-4', className)}
+        {...props}
+      >
         <Form.Field
           required
           name='spreadsheetId'
           control={form.control}
           render={({ field }) => (
-            <Form.Item className='sm:grid grid-cols-form'>
+            <Form.Item className='grid-cols-form sm:grid'>
               <Form.Label className='sm:self-center'>ID ou URL da planilha</Form.Label>
               <div className='relative'>
                 <Form.Control>
@@ -33,7 +37,7 @@ export function SuperchatsForm({ className, ...props }: Readonly<React.HTMLAttri
           name='rememberSpreadsheetId'
           control={form.control}
           render={({ field }) => (
-            <Form.Item className='sm:grid grid-cols-form'>
+            <Form.Item className='grid-cols-form sm:grid'>
               <Checkbox.Wrapper className='col-start-2'>
                 <Form.Control>
                   <Checkbox.Check
@@ -56,7 +60,7 @@ export function SuperchatsForm({ className, ...props }: Readonly<React.HTMLAttri
           name='sheetName'
           control={form.control}
           render={({ field }) => (
-            <Form.Item className='sm:grid grid-cols-form'>
+            <Form.Item className='grid-cols-form sm:grid'>
               <Form.Label className='sm:self-center'>Nome da planilha</Form.Label>
               <div className='relative'>
                 <Form.Control>
@@ -72,7 +76,7 @@ export function SuperchatsForm({ className, ...props }: Readonly<React.HTMLAttri
           name='rememberSheetName'
           control={form.control}
           render={({ field }) => (
-            <Form.Item className='sm:grid grid-cols-form'>
+            <Form.Item className='grid-cols-form sm:grid'>
               <Checkbox.Wrapper className='col-start-2'>
                 <Form.Control>
                   <Checkbox.Check
@@ -88,7 +92,7 @@ export function SuperchatsForm({ className, ...props }: Readonly<React.HTMLAttri
           )}
         />
 
-        <Form.Footer className='sm:grid gap-3 grid-cols-form'>
+        <Form.Footer className='grid-cols-form gap-3 sm:grid'>
           <Button type='submit' size='lg' className='col-start-2 w-full' disabled={isPending}>
             <Show
               when={isPending}
