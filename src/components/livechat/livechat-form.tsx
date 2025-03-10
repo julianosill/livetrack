@@ -22,7 +22,7 @@ export function LivechatForm({ className, ...props }: Readonly<React.HTMLAttribu
           name='liveId'
           control={form.control}
           render={({ field }) => (
-            <Form.Item className='sm:grid grid-cols-form'>
+            <Form.Item className='grid-cols-form sm:grid'>
               <Form.Label className='sm:self-center'>ID ou URL da live</Form.Label>
               <div className='relative'>
                 <Form.Control>
@@ -34,8 +34,8 @@ export function LivechatForm({ className, ...props }: Readonly<React.HTMLAttribu
           )}
         />
 
-        <fieldset className='sm:grid gap-3 grid-cols-form'>
-          <div className='col-start-2 flex gap-x-6 gap-y-4 flex-wrap'>
+        <fieldset className='grid-cols-form gap-3 sm:grid'>
+          <div className='col-start-2 flex flex-wrap gap-x-6 gap-y-4'>
             <Form.Field
               name='onlySuperChats'
               control={form.control}
@@ -85,7 +85,7 @@ export function LivechatForm({ className, ...props }: Readonly<React.HTMLAttribu
           name='spreadsheetId'
           control={form.control}
           render={({ field }) => (
-            <Form.Item className='sm:grid grid-cols-form'>
+            <Form.Item className='grid-cols-form sm:grid'>
               <Form.Label className='sm:self-center'>ID ou URL da planilha</Form.Label>
               <div className='relative'>
                 <Form.Control>
@@ -101,7 +101,7 @@ export function LivechatForm({ className, ...props }: Readonly<React.HTMLAttribu
           name='rememberSpreadsheetId'
           control={form.control}
           render={({ field }) => (
-            <Form.Item className='sm:grid grid-cols-form'>
+            <Form.Item className='grid-cols-form sm:grid'>
               <Checkbox.Wrapper className='col-start-2'>
                 <Form.Control>
                   <Checkbox.Check
@@ -124,7 +124,7 @@ export function LivechatForm({ className, ...props }: Readonly<React.HTMLAttribu
           name='sheetName'
           control={form.control}
           render={({ field }) => (
-            <Form.Item className='sm:grid grid-cols-form'>
+            <Form.Item className='grid-cols-form sm:grid'>
               <Form.Label className='sm:self-center'>Nome da planilha</Form.Label>
               <div className='relative'>
                 <Form.Control>
@@ -140,7 +140,7 @@ export function LivechatForm({ className, ...props }: Readonly<React.HTMLAttribu
           name='rememberSheetName'
           control={form.control}
           render={({ field }) => (
-            <Form.Item className='sm:grid grid-cols-form'>
+            <Form.Item className='grid-cols-form sm:grid'>
               <Checkbox.Wrapper className='col-start-2'>
                 <Form.Control>
                   <Checkbox.Check
@@ -156,7 +156,7 @@ export function LivechatForm({ className, ...props }: Readonly<React.HTMLAttribu
           )}
         />
 
-        <Form.Footer className='sm:grid gap-3 grid-cols-form'>
+        <Form.Footer className='grid-cols-form gap-3 sm:grid'>
           <Show when={isMonitoring} render={<StopMonitoringButton />} fallback={<StartMonitoringButton />} />
         </Form.Footer>
       </Form.Wrapper>

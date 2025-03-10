@@ -6,8 +6,8 @@ import { ROUTES } from '@/constants'
 
 export default async function DocsLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className='max-w-4xl mx-auto w-full min-h-svh flex flex-col gap-16 p-6 overflow-hidden'>
-      <header className='flex justify-between max-xs:flex-col gap-4 items-center'>
+    <div className='mx-auto flex min-h-svh w-full max-w-4xl flex-col gap-16 overflow-hidden p-6'>
+      <header className='flex items-center justify-between gap-4 max-xs:flex-col'>
         <Link href={ROUTES.home}>
           <LiveTrackLogo className='w-36' />
           <span className='sr-only'>LiveTrack</span>

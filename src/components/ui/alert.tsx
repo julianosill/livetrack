@@ -3,7 +3,7 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
-const alertVariants = cva('w-full rounded-lg border p-4 flex flex-col gap-2', {
+const alertVariants = cva('flex w-full flex-col gap-2 rounded-lg border p-4', {
   variants: {
     variant: {
       default: 'bg-background text-foreground',
@@ -24,7 +24,7 @@ const AlertRoot = React.forwardRef<
 AlertRoot.displayName = 'AlertRoot'
 
 const AlertTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => <h5 ref={ref} className={cn('leading-tight font-medium', className)} {...props} />,
+  ({ className, ...props }, ref) => <h5 ref={ref} className={cn('font-medium leading-tight', className)} {...props} />,
 )
 AlertTitle.displayName = 'AlertTitle'
 

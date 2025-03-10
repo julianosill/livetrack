@@ -23,7 +23,7 @@ export { Tabs } from './ui/tabs'
 export { Show } from './utilities/show'
 
 // auth
-export { SignInGoogleButton } from './auth/siginInGoogleButton'
+export { SignInGoogleButton } from './auth/sign-in-google-button'
 
 // forms
 export { LivechatForm } from './livechat/livechat-form'

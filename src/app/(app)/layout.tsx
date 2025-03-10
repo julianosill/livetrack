@@ -6,7 +6,7 @@ export default async function AppLayout({ children }: Readonly<{ children: React
   if (!session) return
 
   return (
-    <div className='max-w-4xl mx-auto w-full min-h-svh flex flex-col gap-16 p-6 overflow-hidden'>
+    <div className='mx-auto flex min-h-svh w-full max-w-4xl flex-col gap-16 overflow-hidden p-6'>
       <Header user={session.user} />
       {children}
       <Footer />

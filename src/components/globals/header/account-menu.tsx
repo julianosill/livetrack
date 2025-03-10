@@ -20,7 +20,7 @@ export function AccountMenu({ user, className, ...props }: Readonly<AccountProps
     <DropdownMenu.Root>
       <DropdownMenu.Trigger
         className={cn(
-          'rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background',
+          'rounded-full ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
           className,
         )}
         {...props}
@@ -32,10 +32,10 @@ export function AccountMenu({ user, className, ...props }: Readonly<AccountProps
       </DropdownMenu.Trigger>
       <DropdownMenu.Content align='end'>
         <DropdownMenu.Group>
-          <DropdownMenu.Label className='grid grid-cols-[1rem_1fr] gap-x-2 gap-y-1 items-center pr-4'>
+          <DropdownMenu.Label className='grid grid-cols-[1rem_1fr] items-center gap-x-2 gap-y-1 pr-4'>
             <User className='size-4' />
             <span>{user.name}</span>
-            <span className='text-xs font-normal text-muted-foreground col-start-2'>{user.email}</span>
+            <span className='col-start-2 text-xs font-normal text-muted-foreground'>{user.email}</span>
           </DropdownMenu.Label>
         </DropdownMenu.Group>
         <DropdownMenu.Separator />

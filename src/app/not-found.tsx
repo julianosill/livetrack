@@ -14,17 +14,17 @@ export default async function NotFound() {
   if (!session) return
 
   return (
-    <div className='max-w-4xl mx-auto w-full min-h-svh flex flex-col gap-8 p-6 overflow-hidden'>
+    <div className='mx-auto flex min-h-svh w-full max-w-4xl flex-col gap-8 overflow-hidden p-6'>
       <Header user={session.user} className='pb-12' />
 
-      <FileX2 className='size-20 animate-pulse mx-auto text-primary' strokeWidth={1} />
+      <FileX2 className='mx-auto size-20 animate-pulse text-primary' strokeWidth={1} />
 
       <div className='text-center'>
-        <h1 className='font-semibold text-2xl text-accent-foreground'>Página não encontrada</h1>
+        <h1 className='text-2xl font-semibold text-accent-foreground'>Página não encontrada</h1>
         <p className='pt-4 text-sm text-muted-foreground'>A página que você estou acessar não existe.</p>
       </div>
 
-      <NavButton href={ROUTES.home} variant='link' className='w-fit mx-auto'>
+      <NavButton href={ROUTES.home} variant='link' className='mx-auto w-fit'>
         Ir à página inicial
       </NavButton>
 

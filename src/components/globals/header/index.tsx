@@ -15,7 +15,7 @@ interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Header({ user, className, ...props }: Readonly<HeaderProps>) {
   return (
-    <header className={cn('flex gap-8 items-center', className)} {...props}>
+    <header className={cn('flex items-center gap-8', className)} {...props}>
       <Link href={ROUTES.home}>
         <LiveTrackLogo className='w-36' />
         <span className='sr-only'>LiveTrack</span>

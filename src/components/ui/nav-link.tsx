@@ -3,7 +3,7 @@ import Link, { type LinkProps } from 'next/link'
 
 import { cn } from '@/lib/utils'
 
-const navLinkVariants = cva('border-b hover:text-primary hover:border-primary transition-colors', {
+const navLinkVariants = cva('border-b transition-colors hover:border-primary hover:text-primary', {
   variants: {
     size: {
       default: 'text-base',

@@ -7,7 +7,7 @@ interface MarkdownProps extends React.HTMLAttributes<HTMLParagraphElement>, Vari
 }
 
 const markdownVariants = cva(
-  'prose text-foreground prose-headings:text-accent-foreground prose-strong:text-foreground prose-headings:font-semibold leading-normal max-w-full',
+  'prose max-w-full leading-normal text-foreground prose-headings:font-semibold prose-headings:text-accent-foreground prose-strong:text-foreground',
   {
     variants: {
       variant: {
