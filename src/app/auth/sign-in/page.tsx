@@ -17,16 +17,17 @@ export default async function SignInPage({ searchParams }: Readonly<SignInPagePr
 
   const signInWithGoogleUrl = new URL(ROUTES.api.auth.signInWithGoogle, env.NEXT_PUBLIC_APP_BASE_URL)
   const redirectPath = searchParams.redirect_path
+  const isRedirectPathValid = redirectPath && redirectPath !== ROUTES.api.auth.signOut
 
-  if (redirectPath) {
+  if (isRedirectPathValid) {
     signInWithGoogleUrl.searchParams.set(AUTH_PARAMS.redirectPath, redirectPath)
   }
 
   return (
-    <div className='flex-1 flex items-center justify-center p-4'>
-      <main className='bg-card p-6 xs:p-12 border rounded-2xl max-w-md text-center'>
-        <LiveTrackLogo className='fill-accent-foreground w-56 mx-auto pb-8' />
-        <p className='pb-12 text-muted-foreground text-sm'>
+    <div className='flex flex-1 items-center justify-center p-4'>
+      <main className='max-w-md rounded-2xl border bg-card p-6 text-center xs:p-12'>
+        <LiveTrackLogo className='mx-auto w-56 fill-accent-foreground pb-8' />
+        <p className='pb-12 text-sm text-muted-foreground'>
           Capture comentários em lives do YouTube em tempo real e também SuperChats enviados ao seu canal.
         </p>
 

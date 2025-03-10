@@ -1,29 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { getSession } from '@/auth'
 import { AUTH_PARAMS, ROUTES } from '@/constants'
 
 export async function middleware(request: NextRequest) {
   const requestUrl = request.nextUrl
   const { pathname, searchParams } = requestUrl
-  const hasRedirectPath = pathname !== '/'
+  const hasRedirectPath = pathname !== '/' || ROUTES.api.auth.signOut
 
-  const session = await getSession()
+  const cookies = request.cookies
+  const session = cookies.get('session')
 
-  if (!session || !session.tokens.refresh_token) {
+  if (!session) {
     requestUrl.pathname = ROUTES.api.auth.signOut
-    if (hasRedirectPath) searchParams.set(AUTH_PARAMS.redirectPath, pathname)
 
-    return NextResponse.redirect(requestUrl)
-  }
-
-  const refreshToken = session.tokens.refresh_token
-  const tokenExpiryDate = session.tokens.expiry_date
-  const isTokenExpired = tokenExpiryDate < Date.now()
-
-  if (refreshToken && isTokenExpired) {
-    requestUrl.pathname = ROUTES.api.auth.refreshToken
-    if (hasRedirectPath) searchParams.set(AUTH_PARAMS.redirectPath, pathname)
+    if (hasRedirectPath) {
+      searchParams.set(AUTH_PARAMS.redirectPath, pathname)
+    }
 
     return NextResponse.redirect(requestUrl)
   }
