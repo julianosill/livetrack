@@ -7,7 +7,7 @@ import { ROUTES } from '@/constants'
 import { googleOAuth2Client } from '@/lib/google'
 import type { SessionType } from '@/types/auth'
 
-export async function refreshToken() {
+export async function refreshToken(): Promise<void> {
   const session = await getSession()
   if (!session) return redirect(ROUTES.api.auth.signOut)
 

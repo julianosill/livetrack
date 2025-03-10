@@ -44,6 +44,9 @@ export function useLivechatForm() {
   })
 
   async function fetchLivechat({ liveId, onlySuperChats }: FetchLivechatProps): Promise<FetchLivechatResult> {
+    const isTokenExpiring = await isTokenExpiringIn(5)
+    if (isTokenExpiring) await refreshToken()
+
     const livechatResult = await fetchStreamingLivechat({ liveId, onlySuperChats, lastMessageTimestamp })
 
     if (!livechatResult.success) {
@@ -67,9 +70,6 @@ export function useLivechatForm() {
     spreadsheetId,
     sheetName,
   }: LivechatFormSchema): Promise<void> {
-    const isTokenExpiring = await isTokenExpiringIn(5)
-    if (isTokenExpiring) await refreshToken()
-
     setIsMonitoring(true)
     if (ignorePast) lastMessageTimestamp = new Date().toISOString()
 
@@ -85,9 +85,6 @@ export function useLivechatForm() {
     if (!appendResult.success) return stopMonitoring()
 
     intervalRef.current = setInterval(async () => {
-      const isTokenExpiring = await isTokenExpiringIn(5)
-      if (isTokenExpiring) await refreshToken()
-
       const fetchResult = await fetchLivechat({ liveId, onlySuperChats })
       if (!fetchResult.success) return stopMonitoring()
 
