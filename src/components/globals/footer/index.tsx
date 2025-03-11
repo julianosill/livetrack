@@ -7,7 +7,7 @@ import { ThemeToggle } from './theme-toogle'
 export function Footer({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <footer
-      className={cn('mt-auto flex flex-wrap items-center justify-between gap-12 border-t py-8', className)}
+      className={cn('mt-auto flex flex-wrap items-center justify-between gap-x-12 gap-y-6 border-t py-8', className)}
       {...props}
     >
       <ThemeToggle />
