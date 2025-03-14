@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Livetrack
 
-## Getting Started
+![Imagem com três telas da aplicação](.github/readme/livetrack-readme.png)
 
-First, run the development server:
+Aplicação web para capturar em tempo real os comentários das lives e SuperChats enviados ao canal do YouTube do usuário, salvando-os diretamente em uma planilha do Google Sheets ou exportando em formato `.csv`.
+
+🔗 [Acesse a aplicação aqui](https://livetrack.julianosill.com.br)
+
+## Tecnologias e ferramentas utilizadas
+
+![typescript](https://img.shields.io/badge/typescript-292b36?style=for-the-badge&logo=typescript)
+![react](https://img.shields.io/badge/react-292b36?style=for-the-badge&logo=react)
+![next](https://img.shields.io/badge/next.js-292b36?style=for-the-badge&logo=next.js)
+![node](https://img.shields.io/badge/node.js-292b36?style=for-the-badge&logo=node.js)
+![google](https://img.shields.io/badge/google-292b36?style=for-the-badge&logo=google)
+![react hook form](https://img.shields.io/badge/react--hook--form-292b36?style=for-the-badge&logo=reacthookform)
+![tailwindcss](https://img.shields.io/badge/tailwindcss-292b36?style=for-the-badge&logo=tailwindcss)
+![shadcn-ui](https://img.shields.io/badge/shadcn--ui-292b36?style=for-the-badge&logo=shadcnui)
+
+## Execute o projeto localmente
+
+Para executar este projeto em sua máquina, é necessário possuir o `Node.js` instalado (versão 18 ou superior). Caso não o tenha, instale-o [aqui](https://nodejs.org).
+
+1. Clone este repositório, acesse a pasta do projeto e instale as dependências necessárias.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/julianosill/livetrack.git
+cd livetrack
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Crie o arquivo `.env.local` e adicione as variáveis de ambiente necessárias conforme o exemplo abaixo. Ou renomeie o arquivo `.env.sample` e adicione os respectivos valores.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REDIRECT_URI=
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+JWT_SECRET_KEY=
 
-## Learn More
+NEXT_PUBLIC_APP_BASE_URL=
+NEXT_PUBLIC_API_BASE_URL=
+```
 
-To learn more about Next.js, take a look at the following resources:
+3. Em seguida, execute o comando:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bach
+pnpm dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+A aplicação estará disponível no endereço informado em seu terminal, exemplo: [http://localhost:3000](http://localhost:3000).
