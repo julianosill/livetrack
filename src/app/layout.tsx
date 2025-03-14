@@ -17,7 +17,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang='pt-BR' className={`${inter.variable} antialiased`} suppressHydrationWarning>
+    <html
+      lang='pt-BR'
+      className={`${inter.variable} scrollbar-thin scrollbar-track-transparent scrollbar-track-rounded-full scrollbar-thumb-foreground/25 antialiased`}
+      suppressHydrationWarning
+    >
       <body>
         <Providers>{children}</Providers>
       </body>
