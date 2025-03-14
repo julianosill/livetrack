@@ -6,6 +6,8 @@ Aplicação web para capturar em tempo real os comentários das lives e SuperCha
 
 🔗 [Acesse a aplicação aqui](https://livetrack.julianosill.com.br)
 
+https://github.com/user-attachments/assets/c1de5f66-2535-4c37-bca2-d5ff1eef28bb
+
 ## Tecnologias e ferramentas utilizadas
 
 ![typescript](https://img.shields.io/badge/typescript-292b36?style=for-the-badge&logo=typescript)
